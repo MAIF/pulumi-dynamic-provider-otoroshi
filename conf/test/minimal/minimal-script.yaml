@@ -1,0 +1,4 @@
+kind: Script
+spec:
+  id: minimal-script
+  name: minimal-script

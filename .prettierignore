@@ -1,0 +1,7 @@
+**/initial_state*.json
+**/cloud-config.yaml
+**/cloud-init.yaml
+.pulumi
+lib
+.npm
+CHANGELOG.md

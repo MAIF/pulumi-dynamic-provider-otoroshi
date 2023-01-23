@@ -1,0 +1,4 @@
+kind: ServiceGroup
+spec:
+  id: minimal-servicegroup
+  name: minimal-servicegroup

@@ -1,0 +1,10 @@
+apiVersion: proxy.otoroshi.io/v1alpha1
+kind: Organization
+metadata:
+  name: full-organization-1
+spec:
+  id: full-organization-1
+  name: full-organization-1
+  description: Default organization created with Pulumi
+  metadata: {}
+  tags: []

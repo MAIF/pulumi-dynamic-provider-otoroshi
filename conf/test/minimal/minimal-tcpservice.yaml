@@ -1,0 +1,4 @@
+kind: TcpService
+spec:
+  id: minimal-tcpservice
+  name: minimal-tcpservice
