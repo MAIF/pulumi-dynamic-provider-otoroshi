@@ -1,0 +1,24 @@
+{
+    "$id": "apikey_spec.json",
+    "type": "object",
+    "title": "Otoroshi ApiKey Specification",
+    "description": "The ApiKey file is a YAML file defining an Otoroshi Apikey resource.",
+    "properties": {
+        "apiVersion": { "type": "string" },
+        "kind": { "type": "string" },
+        "metadata": {
+            "type": "object",
+            "properties": {
+                "name": { "type": "string" },
+                "import": { "type": "boolean" }
+            },
+            "additionalProperties": false
+        },
+        "spec": {
+            "type": "object",
+            "required": ["clientId", "clientName"]
+        }
+    },
+    "required": ["kind", "spec"],
+    "additionalProperties": false
+}

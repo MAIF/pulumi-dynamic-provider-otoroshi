@@ -1,0 +1,11 @@
+apiVersion: proxy.otoroshi.io/v1alpha1
+kind: Organization
+metadata:
+  name: default-organization
+  import: true
+spec:
+  id: default
+  name: Default organization
+  description: The default organization
+  metadata: {}
+  tags: []

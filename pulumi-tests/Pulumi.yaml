@@ -1,0 +1,3 @@
+name: pulumi-dynamic-provider-otoroshi-test
+runtime: nodejs
+description: Pulumi Dynamic Provider for Otoroshi Integration Tests

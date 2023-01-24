@@ -1,0 +1,24 @@
+{
+    "$id": "resource_spec.json",
+    "type": "object",
+    "title": "Otoroshi general resource Specification",
+    "description": "The resource file is a YAML file defining an Otoroshi general resource.",
+    "properties": {
+        "apiVersion": { "type": "string" },
+        "kind": { "type": "string" },
+        "metadata": {
+            "type": "object",
+            "properties": {
+                "name": { "type": "string" },
+                "import": { "type": "boolean" }
+            },
+            "additionalProperties": false
+        },
+        "spec": {
+            "type": "object",
+            "required": ["id", "name"]
+        }
+    },
+    "required": ["kind", "spec"],
+    "additionalProperties": false
+}

@@ -1,0 +1,60 @@
+{
+    "name": "@antoine-lecomte/pulumi-dynamic-provider-otoroshi",
+    "description": "Pulumi dynamic provider for Otoroshi",
+    "version": "0.9.3",
+    "author": "Antoine LECOMTE",
+    "license": "Apache-2.0",
+    "repository": {
+        "url": "https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi"
+    },
+    "homepage": "https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi",
+    "bugs": "https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi/issues",
+    "engines": {
+        "node": ">=16"
+    },
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "scripts": {
+        "build": "rm -rf ./lib && tsc -p tsconfig-build.json",
+        "build-win": "rd /q /s lib && tsc -p tsconfig-build.json",
+        "format": "prettier --write .",
+        "format-check": "prettier --check .",
+        "lint": "eslint . --ext .ts",
+        "audit-check": "npm audit --registry=https://registry.npmjs.org --audit-level=high",
+        "dep-check": "depcheck --ignores=@types/node",
+        "prepublishOnly": "npm run lint",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "version": "auto-changelog && git add CHANGELOG.md"
+    },
+    "files": [
+        "lib/**/*"
+    ],
+    "keywords": [
+        "azure",
+        "pulumi",
+        "provider",
+        "otoroshi"
+    ],
+    "devDependencies": {
+        "@types/jest": "^29.2.5",
+        "@types/node": "^18.11.18",
+        "@typescript-eslint/eslint-plugin": "^5.48.2",
+        "@typescript-eslint/parser": "^5.48.2",
+        "auto-changelog": "^2.4.0",
+        "eslint": "^8.32.0",
+        "eslint-config-prettier": "^8.6.0",
+        "jest": "^29.3.1",
+        "prettier": "^2.8.3",
+        "ts-jest": "^29.0.5"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.51.1",
+        "@types/node-fetch": "^2.6.2",
+        "ajv": "^8.12.0",
+        "deep-object-diff": "^1.1.7",
+        "node-fetch": "^2.6.8",
+        "typescript": "^4.9.4",
+        "yaml": "^2.2.1"
+    }
+}

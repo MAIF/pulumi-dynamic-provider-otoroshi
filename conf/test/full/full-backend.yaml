@@ -1,0 +1,38 @@
+---
+apiVersion: 'proxy.otoroshi.io/v1alpha1'
+kind: 'Backend'
+metadata:
+  name: 'new-backend'
+spec:
+  _loc:
+    tenant: 'default'
+    teams:
+      - 'default'
+  id: 'backend_abdb60903-703c-43cc-8b33-75d02549a5b9'
+  name: 'New backend'
+  description: 'A new backend'
+  tags: []
+  metadata: {}
+  backend:
+    targets: []
+    root: '/'
+    rewrite: false
+    load_balancing:
+      type: 'RoundRobin'
+    client:
+      retries: 1
+      max_errors: 20
+      retry_initial_delay: 50
+      backoff_factor: 2
+      call_timeout: 30000
+      call_and_stream_timeout: 120000
+      connection_timeout: 10000
+      idle_timeout: 60000
+      global_timeout: 30000
+      sample_interval: 2000
+      proxy: {}
+      custom_timeouts: []
+      cache_connection_settings:
+        enabled: false
+        queue_size: 2048
+    health_check: null

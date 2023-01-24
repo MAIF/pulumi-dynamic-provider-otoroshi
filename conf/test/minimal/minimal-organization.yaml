@@ -1,0 +1,4 @@
+kind: Organization
+spec:
+  id: minimal-organization
+  name: minimal-organization

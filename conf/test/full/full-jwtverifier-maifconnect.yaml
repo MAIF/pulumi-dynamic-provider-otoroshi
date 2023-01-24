@@ -1,0 +1,46 @@
+apiVersion: proxy.otoroshi.io/v1alpha1
+kind: JwtVerifier
+metadata:
+  name: toto-connect
+spec:
+  _loc:
+    tenant: default
+    teams:
+      - default
+  type: global
+  id: jwt-verifier-toto-connect
+  name: Toto-Connect
+  desc: Toto Connect Token Verification
+  strict: true
+  source:
+    type: InHeader
+    name: Toto-Connect-Token
+    remove: ''
+  algoSettings:
+    type: JWKSAlgoSettings
+    url: https://co.toto.fr/connect/jwk
+    timeout: 10000
+    headers: {}
+    ttl: 3600000
+    kty: RSA
+    proxy: null
+    tls_config:
+      certs: []
+      trustedCerts: []
+      mtls: false
+      loose: false
+      trustAll: false
+    mtlsConfig:
+      certs: []
+      trustedCerts: []
+      mtls: false
+      loose: false
+      trustAll: false
+  strategy:
+    type: PassThrough
+    verificationSettings:
+      fields:
+        iss: 'The Issuer'
+      arrayFields: {}
+  metadata: {}
+  tags: []

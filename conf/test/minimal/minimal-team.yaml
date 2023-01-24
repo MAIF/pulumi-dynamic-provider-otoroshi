@@ -1,0 +1,5 @@
+kind: Team
+spec:
+  tenant: default
+  id: minimal-team
+  name: minimal-team

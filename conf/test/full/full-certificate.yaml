@@ -1,0 +1,85 @@
+---
+apiVersion: 'proxy.otoroshi.io/v1alpha1'
+kind: 'Certificate'
+metadata:
+  name: 'otoroshi-default-client-certificate'
+spec:
+  _loc:
+    tenant: 'default'
+    teams:
+      - 'default'
+  id: 'full-otoroshi-client'
+  domain: 'Otoroshi Default Client Certificate'
+  name: 'Otoroshi Default Client Certificate Full'
+  description: 'Otoroshi client certificate (auto-generated)'
+  chain: "-----BEGIN CERTIFICATE-----\nMIIDuTCCAqGgAwIBAgIJAOri9g7SsBdlMA0GCSqGSIb3DQEBCwUAMGoxNTAzBgNV\n\
+    BAMMLE90b3Jvc2hpIERlZmF1bHQgSW50ZXJtZWRpYXRlIENBIENlcnRpZmljYXRl\nMR4wHAYDVQQLDBVPdG9yb3NoaSBDZXJ0aWZpY2F0ZXMxETAPBgNVBAoMCE90b3Jv\n\
+    c2hpMB4XDTIzMDEyMzE1MzMxMloXDTI0MDEyMzE1MzMxMlowYTEsMCoGA1UEAwwj\nT3Rvcm9zaGkgRGVmYXVsdCBDbGllbnQgQ2VydGlmaWNhdGUxHjAcBgNVBAsMFU90\n\
+    b3Jvc2hpIENlcnRpZmljYXRlczERMA8GA1UECgwIT3Rvcm9zaGkwggEiMA0GCSqG\nSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCpZ6JPd1Fp3xR1b51TFFhQQDezIdnZ2GSO\n\
+    bMe1Y83qDZD2oSzuRiX1k4lFtGgg24q7uB0EGsyhTHb3PzS+yd9/W6o1hIJB2ERs\nSGAZnVVltDOEorlsDB5TaWNbeF4lVv2ThWcMATrm0OF665wK4J5QH6vvVwV2XIbx\n\
+    oFhiLqluq6U6PEVxiJgmKjoR2BLXPjaeOPexb85Buz1dMFQm/t6FE7RSYDnaUiij\nAyAD9MJwrdL+iPwPLbcn56/KLikdcSU56YkrnBD72BE60UUJDRNbROdZGmeRsgF9\n\
+    HvDbBPD0MDAfccYVUkXMRmnXXripCBpZK2Lqd8rAhXndk1JAfyXDAgMBAAGjazBp\nMAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUF\n\
+    BwMCBggrBgEFBQcDATAfBgNVHSMEGDAWgBRh7KlRh9eChjV5iCOEOrHHyZPV0jAJ\nBgNVHREEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQCaejWyallR0h19aRHADhudb7Jl\n\
+    Z+aK2Wh1auo0RpiwiAk5s7Mu/vwph5k2uAefuHFKav19tHmx01rhdfBeAE+Jn++3\nL3VhX5/iuxZsmWfRC/uH6thNu4Ay+fCjZrdVcAzMC6HGjclCvylDu0WRA4hwa20q\n\
+    w4Z58RMYZTTj53Atg08O5NrRxjZmq7ROUVhZIy1s/SBxgoNIKm3oCKQflF/6DBoh\n/7VQWcB1U7Bjkd89V0a9yakfc4dCHx99Tkw2NHCAxHYi5fuE/RaM/spMOHR70vyd\n\
+    XiyXWvt5S7i4xJbckxItWXKsmgi5XGjNJ3kx/cDe3N/a0F9T2H4qF2ITPiSM\n-----END CERTIFICATE-----\n\
+    \n-----BEGIN CERTIFICATE-----\nMIIDtTCCAp2gAwIBAgIJAJ++TOJx3zpTMA0GCSqGSIb3DQEBCwUAMGIxLTArBgNV\n\
+    BAMMJE90b3Jvc2hpIERlZmF1bHQgUm9vdCBDQSBDZXJ0aWZpY2F0ZTEeMBwGA1UE\nCwwVT3Rvcm9zaGkgQ2VydGlmaWNhdGVzMREwDwYDVQQKDAhPdG9yb3NoaTAeFw0y\n\
+    MzAxMjMxNTMzMTJaFw0zMzAxMjAxNTMzMTJaMGoxNTAzBgNVBAMMLE90b3Jvc2hp\nIERlZmF1bHQgSW50ZXJtZWRpYXRlIENBIENlcnRpZmljYXRlMR4wHAYDVQQLDBVP\n\
+    dG9yb3NoaSBDZXJ0aWZpY2F0ZXMxETAPBgNVBAoMCE90b3Jvc2hpMIIBIjANBgkq\nhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAru4P1eTowGqAM7jPPIjjP42Fn0MB12G3\n\
+    7Lilw/Tj8lbHkOuEtxMlMmogRNyO4SGKfUsouRTy+gSaa89vLSjU+j+xljgEWWfA\naZcnRNvK79w8E8p9fXGv/gx9zJ6FD8vuyOBFKQcrEhWAqzD/xGI5RnldFNWWPtQH\n\
+    exr1jmZ193fE1aUvPulVcQlkfa/wTXUpH/avS93kOJyf8KMQONAr5+cHVmRtV4/q\nNYbllbMyNC64aahAORAE3JG8SgqEc1ZfkxSTOJv+u9I2FMvkXzK0B394HnSjcFe4\n\
+    WDOcTn+N+Hlq5k2qOprFl4lGqK3pF08lcH64Ar58CS0ET7quBl6zCQIDAQABo2Yw\nZDASBgNVHRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBhjAfBgNVHSMEGDAW\n\
+    gBR0sl8TKFbz5slJa5fXwUGo+auQkjAdBgNVHQ4EFgQUYeypUYfXgoY1eYgjhDqx\nx8mT1dIwDQYJKoZIhvcNAQELBQADggEBAF0yaj/bnfOs5xE/nDujxtrHRkgdTYUg\n\
+    FWyXDaZugtOmQZjjiPljsv2HmNs9Nr9GLT1JnBeYmav1n+7BKlklq+3LLtwIsXct\nVQatiEq04JgP90zj5TNzJxHiCR2dHoUSm7FPEWjKomAbT9YQalBNS97al4KPKYmQ\n\
+    EWL9/KOajtbzMqoHsZQtq/l8ADY81u7H+lyjYmS2sEECb6c3nbeNcR31ae8AZA7D\nflIGPQ0AyPdBZ48+q+nzvlKlag6feF7Xpz9SbNEiNwmYZ+iuGls1RqIEvt7fK+d8\n\
+    htflDDw325zRoDfGMkovsQf23wD0QFQa9L5p5P/wmMx8AX50xAgb+gw=\n-----END CERTIFICATE-----\n\
+    \n-----BEGIN CERTIFICATE-----\nMIIEcjCCA1qgAwIBAgIJAPT9/Pxg1xzQMA0GCSqGSIb3DQEBCwUAMGIxLTArBgNV\n\
+    BAMMJE90b3Jvc2hpIERlZmF1bHQgUm9vdCBDQSBDZXJ0aWZpY2F0ZTEeMBwGA1UE\nCwwVT3Rvcm9zaGkgQ2VydGlmaWNhdGVzMREwDwYDVQQKDAhPdG9yb3NoaTAeFw0y\n\
+    MzAxMjMxNTMzMTFaFw0zMzAxMjAxNTMzMTFaMGIxLTArBgNVBAMMJE90b3Jvc2hp\nIERlZmF1bHQgUm9vdCBDQSBDZXJ0aWZpY2F0ZTEeMBwGA1UECwwVT3Rvcm9zaGkg\n\
+    Q2VydGlmaWNhdGVzMREwDwYDVQQKDAhPdG9yb3NoaTCCASIwDQYJKoZIhvcNAQEB\nBQADggEPADCCAQoCggEBANkq952BISjSQJdcq3LVXDWv8Ynxk//a89wnTj6F4zc4\n\
+    Puh1fY+ONUxEVlIv1LV2wtDOInfk2jTIv4ynY3FaDXwqLlfB67oyepeJHRqr4bjJ\nCEGFvUBhxVXUNN3KhcYQzNYWS3ujoUY4WeFkwpXpkzKD8zCrx+AXJ3c0U+OLdOxd\n\
+    FKycZmrXWG05sx8GZkA1cZ0oS+r3cyTWQdp6us5h0DzXRr1R4g8RprKZKfCE28uW\nFQAtAHVR6rtdO7HQFFCMbhQ7TEaTGQAW5jPUCFA7gzrXpZ7Ulf5mgliLQKdxF7aY\n\
+    mvClP9vy+MTxshGL/yzA5LuErhIUq2xsBDdbZgIE8VUCAwEAAaOCASkwggElMA8G\nA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEGMB8GA1UdIwQYMBaAFHSyXxMo\n\
+    VvPmyUlrl9fBQaj5q5CSMB0GA1UdDgQWBBR0sl8TKFbz5slJa5fXwUGo+auQkjCB\nwQYIKwYBBQUHAQEEgbQwgbEwZQYIKwYBBQUHMAKGWWh0dHA6Ly9vdG9yb3NoaS1h\n\
+    cGkub3RvLnRvb2xzOjgwODAvLndlbGwta25vd24vb3Rvcm9zaGkvY2VydGlmaWNh\ndGVzLzE3NjUzNTQ0Mjc1MjQ4ODgwODQ4MEgGCCsGAQUFBzABhjxodHRwOi8vb3Rv\n\
+    cm9zaGktYXBpLm90by50b29sczo4MDgwLy53ZWxsLWtub3duL290b3Jvc2hpL29j\nc3AwDQYJKoZIhvcNAQELBQADggEBAGwiUgdcDmG1MlM+aErq76v37oAPspaj9E1k\n\
+    r5ZvlGem5QBfezwMXF2dyI5/OhF2h0h95GgpAM1KGCXc1Jwgh0RVfYJdzWX6kK5s\nwUY7OIhOtw8G6dAF4qCw8ac+PZ5ZPAGfnVsfvoJlTsCT5vXmWhJRojZ1ESkeaw3f\n\
+    lTBj/qCf6TvesrJY941u3XrE6GjVEN4c5aGdTAiPPAjNge6prW3H2M9k0ynWbqLi\ntyVrcAJ3DeaYM54+KIV+BVSEcG2wX7YA79MLnrWM4KOcgaHmMNDiA/C5VRhGGQ0K\n\
+    ey4izo6uSjRbqRsGcnhqHKXzBL9SL4iBKekWylo2MRCMQhOHoYU=\n-----END CERTIFICATE-----\n"
+  caRef: null
+  privateKey: "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCpZ6JPd1Fp3xR1\n\
+    b51TFFhQQDezIdnZ2GSObMe1Y83qDZD2oSzuRiX1k4lFtGgg24q7uB0EGsyhTHb3\nPzS+yd9/W6o1hIJB2ERsSGAZnVVltDOEorlsDB5TaWNbeF4lVv2ThWcMATrm0OF6\n\
+    65wK4J5QH6vvVwV2XIbxoFhiLqluq6U6PEVxiJgmKjoR2BLXPjaeOPexb85Buz1d\nMFQm/t6FE7RSYDnaUiijAyAD9MJwrdL+iPwPLbcn56/KLikdcSU56YkrnBD72BE6\n\
+    0UUJDRNbROdZGmeRsgF9HvDbBPD0MDAfccYVUkXMRmnXXripCBpZK2Lqd8rAhXnd\nk1JAfyXDAgMBAAECggEABzuUZS+TRPs2mYCVwOJpY0L113EwDT2Dpl/dmcO0Z6eD\n\
+    OdlBNleKlY577QNAjBQwVOB0MksrBnRhz4YEbGSCsgjWkdwuklbqx1n1t58NWNjI\n3emNE7n9IRMqubdZ0BIdPhgTGyLOtX3tZDA8155y4Ll7DHtBXlk7Lh2dXtL4MYnf\n\
+    wagvOol7omg1ZcS2w0bzYTaz4InRl9Dh9oBJ/j3duGt6hS3iIbI23SRIwPbXvekS\nuedGmn5rtE92FDNg9ECxCy3ZYrppftDGLMGFXaZWqUHbqpYI7/Eah6tlBKok3DYX\n\
+    MYM/nPPW/gV/YwVH6obRDOIDHsNYSDinKaH2qn3nOQKBgQDaaAXyes2xHSblV07d\n4NvWSNxBKtn7WsiOxetAG5762CSPbfZgAQ6qca47gf1SD0oR9psv8lfgQTU6nfsH\n\
+    ts5YjJEPuWQmSwK9LdwaUilXhlAuP79uiIJE4W6VaT6xLcYbfU2mksmRl6WZET8x\n38NurMinVghqsxfAr+NfltxL2QKBgQDGkGGEpCihPOcPWCCoXERctrNfsC1iZu1l\n\
+    UUispeWY5sime8QiCWSGVIq+kjvh8WKrzFKS2fZrYOUprZSeLqFdCvyoWKpQhG+J\nZWSXYWsqlOkltnQve+4oqTyFom6+xKcyKDeB8dGCEn5zbKFEG2yB+yv0/hLIU9PU\n\
+    EaJFKfII+wKBgQCHu2gextT4Qm6+zuCzoZ/d70/6q//mZwgHOtc18zR9HkCyZptc\nFKwhnx6x2tos2lWlDkZpqMmWE9BZyn6Mz74zZ8BrLkMgTTO5kDuem/sXauB/rZxx\n\
+    vCKBXjxUXKDaieD5iojsgYMFmWIP25kTjMWvDXByFlSKwxx64pSC/oWQGQKBgEg3\n4v/3JL/gArnV96rERCjkWkEHNrp/bQBYm/IPNH50Ea5bfW5TtDgXL484aIc44AZT\n\
+    /gRjOfi7+R07gL43f4DzqgkglnFKebajJf7Y8709A78vqPpMPMaVJuoDtfu0Uosv\njWC5rtV8HHmmnNDEmKZ9z/L/JZ2uv3B2KWq2Ys1ZAoGACYQwiVWWdXzQZd9Qnsd4\n\
+    Z2nlkvKfFDSwRpAh2R0bEZrASW2aHEnRaZtW6VF6porgWlpv76bMHaXbj0oQ8/RB\nGNM+m36gZICWSgLwBEG/k+vDaAD3Y+JHnGUmj8+0wEVIDFuTN0CBEQpgJhvkh62x\n\
+    qaZX9OzB05MCWucdTI31yio=\n-----END PRIVATE KEY-----\n"
+  selfSigned: false
+  ca: false
+  valid: true
+  exposed: true
+  revoked: false
+  autoRenew: true
+  letsEncrypt: false
+  subject: 'OU=Otoroshi Certificates, O=Otoroshi, CN=Otoroshi Default Client Certificate'
+  from: 1674487992000
+  to: 1706023992000
+  client: true
+  keypair: false
+  sans: []
+  certType: 'client'
+  password: null
+  metadata:
+    csr: "{\"hosts\":[],\"key\":{\"algo\":\"rsa\",\"size\":2048},\"name\":{},\"subject\"\
+      :\"CN=Otoroshi Default Client Certificate, OU=Otoroshi Certificates, O=Otoroshi\"\
+      ,\"client\":true,\"ca\":false,\"duration\":31536000000,\"signatureAlg\":\"SHA256WithRSAEncryption\"\
+      ,\"digestAlg\":\"SHA-256\"}"
+  tags: []

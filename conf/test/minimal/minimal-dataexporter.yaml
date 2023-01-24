@@ -1,0 +1,4 @@
+kind: DataExporter
+spec:
+  id: minimal-dataexporter
+  name: minimal-dataexporter

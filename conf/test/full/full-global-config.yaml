@@ -1,0 +1,145 @@
+---
+apiVersion: 'proxy.otoroshi.io/v1alpha1'
+kind: 'GlobalConfig'
+metadata:
+  name: 'global-config'
+spec:
+  tags: []
+  letsEncryptSettings:
+    enabled: false
+    server: 'acme://letsencrypt.org/staging'
+    emails: []
+    contacts: []
+    publicKey: ''
+    privateKey: ''
+  lines:
+    - 'prod'
+  initWithNewEngine: true
+  maintenanceMode: false
+  enableEmbeddedMetrics: true
+  streamEntityOnly: true
+  autoLinkToDefaultGroup: true
+  limitConcurrentRequests: false
+  maxConcurrentRequests: 1000
+  maxHttp10ResponseSize: 4194304
+  useCircuitBreakers: true
+  apiReadOnly: false
+  u2fLoginOnly: false
+  trustXForwarded: true
+  ipFiltering:
+    whitelist: []
+    blacklist: []
+  throttlingQuota: 100000
+  perIpThrottlingQuota: 500
+  analyticsWebhooks: []
+  alertsWebhooks: []
+  elasticWritesConfigs: []
+  elasticReadsConfig: null
+  alertsEmails: []
+  logAnalyticsOnServer: false
+  useAkkaHttpClient: false
+  endlessIpAddresses: []
+  statsdConfig: null
+  backOfficeAuthRef: null
+  mailerSettings:
+    type: 'none'
+  cleverSettings: null
+  maxWebhookSize: 100
+  middleFingers: false
+  maxLogsSize: 1000
+  otoroshiId: 'a3d6cb50a-9780-4193-9bb7-5c283c5a85d4'
+  snowMonkeyConfig:
+    enabled: false
+    outageStrategy: 'OneServicePerGroup'
+    includeUserFacingDescriptors: false
+    dryRun: false
+    timesPerDay: 1
+    startTime: '09:00:00.000'
+    stopTime: '23:59:59.000'
+    outageDurationFrom: 600000
+    outageDurationTo: 3600000
+    targetGroups: []
+    chaosConfig:
+      enabled: true
+      largeRequestFaultConfig: null
+      largeResponseFaultConfig: null
+      latencyInjectionFaultConfig:
+        ratio: 0.2
+        from: 500
+        to: 5000
+      badResponsesFaultConfig:
+        ratio: 0.2
+        responses:
+          - status: 502
+            body: '{"error":"Nihonzaru everywhere ..."}'
+            headers:
+              Content-Type: 'application/json'
+  scripts:
+    enabled: false
+    transformersRefs: []
+    transformersConfig: {}
+    validatorRefs: []
+    validatorConfig: {}
+    preRouteRefs: []
+    preRouteConfig: {}
+    sinkRefs: []
+    sinkConfig: {}
+    jobRefs: []
+    jobConfig: {}
+  geolocationSettings:
+    type: 'none'
+  userAgentSettings:
+    enabled: false
+  autoCert:
+    enabled: false
+    replyNicely: false
+    caRef: null
+    allowed: []
+    notAllowed: []
+  tlsSettings:
+    defaultDomain: null
+    randomIfNotFound: false
+    includeJdkCaServer: true
+    includeJdkCaClient: true
+    trustedCAsServer: []
+  quotasSettings:
+    enabled: false
+    dailyQuotasThreshold: 0.8
+    monthlyQuotasThreshold: 0.8
+  plugins:
+    enabled: true
+    refs:
+      - 'cp:otoroshi.next.proxy.ProxyEngine'
+      - 'cp:otoroshi.plugins.apikeys.ClientCredentialService'
+    config:
+      NextGenProxyEngine:
+        enabled: true
+        debug: false
+        debug_headers: false
+        domains:
+          - '*'
+        routing_strategy: 'tree'
+      ClientCredentialService:
+        domain: '*'
+        expiration: 3600000
+        defaultKeyPair: 'otoroshi-jwt-signing'
+        secure: true
+    excluded: []
+  metadata: {}
+  templates:
+    route: {}
+    service: {}
+    backend: {}
+    target: {}
+    descriptor: {}
+    apikey: {}
+    group: {}
+    template: {}
+    verifier: {}
+    authConfig: {}
+    certificate: {}
+    script: {}
+    tcpService: {}
+    dataExporter: {}
+    tenant: {}
+    team: {}

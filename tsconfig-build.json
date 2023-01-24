@@ -1,0 +1,7 @@
+{
+    "extends": "./tsconfig.json",
+    "exclude": ["assets/test/**/*", "src/**/*.test.ts"],
+    "compilerOptions": {
+        "removeComments": true
+    }
+}
