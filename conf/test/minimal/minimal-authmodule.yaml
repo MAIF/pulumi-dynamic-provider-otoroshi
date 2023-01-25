@@ -1,0 +1,4 @@
+kind: AuthModule
+spec:
+  id: minimal-authmodule
+  name: minimal-authmodule

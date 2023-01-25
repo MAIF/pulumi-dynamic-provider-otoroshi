@@ -1,0 +1,79 @@
+apiVersion: proxy.otoroshi.io/v1alpha1
+kind: Script
+metadata:
+  name: totoconnecttokenasapikey
+spec:
+  _loc:
+    tenant: default
+    teams:
+      - default
+  id: script-toto-connect
+  name: TotoConnectTokenAsApiKey
+  desc: New request transformer
+  code: >-
+    import akka.http.scaladsl.util.FastFuture
+
+    import com.auth0.jwt.JWT
+
+    import org.joda.time.DateTime
+
+    import otoroshi.env.Env
+
+    import otoroshi.next.plugins.api.{NgPluginCategory, NgPluginVisibility, NgStep}
+
+    import otoroshi.models.{ApiKey, RemainingQuotas, ServiceDescriptorIdentifier}
+
+    import otoroshi.script.{PreRouting, PreRoutingContext}
+
+    import otoroshi.security.IdGenerator
+
+    import play.api.libs.json._
+
+    import scala.concurrent.{ExecutionContext, Future}
+
+    class TotoConnectTokenAsApikey extends PreRouting {
+      override def name: String = "Toto connect token as apikey"
+      override def defaultConfig: Option[JsObject] = Some(Json.obj("TotoConnectTokenAsApikey" -> Json.obj()))
+      override def description: Option[String] = Some(s"This plugin uses toto connect token as an apikey")
+      override def visibility: NgPluginVisibility = NgPluginVisibility.NgInternal
+      override def categories: Seq[NgPluginCategory] = Seq(NgPluginCategory.Custom, NgPluginCategory.Security, NgPluginCategory.AccessControl, NgPluginCategory.Authentication)
+      override def steps: Seq[NgStep] = Seq(NgStep.PreRoute)
+      override def preRoute(ctx: PreRoutingContext)(implicit env: Env, ec: ExecutionContext): Future[Unit] = {
+        if (ctx.request.path.endsWith("/me")) {
+          ctx.request.headers.get("Toto-Connect-Token") match {
+            case None => FastFuture.successful(()) // will fail at the JWT verifier
+            case Some(tokenRaw) => {
+              val token = JWT.decode(tokenRaw)
+              if (token.getClaim("id") != null) {
+                val userId = token.getClaim("id").asString()
+                val apikey = ApiKey(
+                  clientId = s"toto-connect-user-${userId}",
+                  clientSecret = IdGenerator.token(128),
+                  clientName = s"toto-connect-user-${userId}",
+                  authorizedEntities = Seq(ServiceDescriptorIdentifier(ctx.descriptor.id)),
+                  validUntil = Some(DateTime.now().plusMinutes(10)),
+                  throttlingQuota = 100,
+                  dailyQuota = RemainingQuotas.MaxValue,
+                  monthlyQuota = RemainingQuotas.MaxValue,
+                  tags = Seq.empty,
+                  metadata = Map(
+                    "idSiebel" -> userId,
+                  )
+                )
+                ctx.attrs.put(otoroshi.plugins.Keys.ApiKeyKey -> apikey)
+                FastFuture.successful(())
+              } else {
+                FastFuture.failed(new Throwable("Wrong type of token"))
+              }
+            }
+          }
+        } else {
+          FastFuture.successful(())
+        }
+      }
+    }
+
+    new TotoConnectTokenAsApikey()
+  type: preroute
+  metadata: {}
+  tags: []

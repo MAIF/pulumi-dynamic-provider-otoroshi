@@ -1,0 +1,83 @@
+apiVersion: proxy.otoroshi.io/v1alpha1
+kind: AuthModule
+metadata:
+  name: hp_dev-epa-backend-admin
+spec:
+  _loc:
+    tenant: default
+    teams:
+      - default
+  type: oauth2
+  id: auth-config-ping-federate-epa
+  name: hp_dev-epa-backend-admin
+  desc: Ping Federate hp_dev-epa-backend-admin
+  sessionMaxAge: 86400
+  userValidators: []
+  clientId: hp_dev-epa-backend-admin
+  clientSecret: ''
+  authorizeUrl: https://idp.toto.fr/as/authorization.oauth2
+  tokenUrl: https://idp.toto.fr:1443/as/token.oauth2
+  userInfoUrl: https://idp.toto.fr/idp/userinfo.openid
+  introspectionUrl: https://idp.toto.fr/as/introspect.oauth2
+  loginUrl: https://idp.toto.fr/as/authorization.oauth2
+  logoutUrl: https://idp.toto.fr/idp/startSLO.ping
+  scope: openid profile email
+  claims: email matricule
+  useCookie: false
+  useJson: false
+  pkce:
+    enabled: false
+    algorithm: S256
+  noWildcardRedirectURI: true
+  readProfileFromToken: false
+  accessTokenField: access_token
+  jwtVerifier:
+    type: JWKSAlgoSettings
+    url: https://idp.toto.fr/pf/JWKS
+    timeout: 2000
+    headers: {}
+    ttl: 18000000
+    kty: RSA
+    proxy: null
+    tls_config:
+      certs: []
+      trustedCerts: []
+      mtls: false
+      loose: false
+      trustAll: false
+    mtlsConfig:
+      certs: []
+      trustedCerts: []
+      mtls: false
+      loose: false
+      trustAll: false
+  nameField: name
+  emailField: email
+  apiKeyMetaField: apkMeta
+  apiKeyTagsField: apkTags
+  otoroshiDataField: app_metadata|otoroshi_data
+  callbackUrl: https://callback.toto.fr/privateapps/generic/callback
+  oidConfig: https://idp.toto.fr/.well-known/openid-configuration
+  mtlsConfig:
+    certs: []
+    trustedCerts: []
+    mtls: true
+    loose: false
+    trustAll: true
+  proxy: null
+  extraMetadata:
+    izanami_admin: 'false'
+    izanami_authorized_patterns: norightatall:*
+  metadata: {}
+  tags: []
+  refreshTokens: false
+  sessionCookieValues:
+    httpOnly: false
+    secure: false
+  superAdmins: false
+  rightsOverride: {}
+  dataOverride:
+    antoine.lecomte@externe.toto.fr:
+      izanami_admin: 'true'
+      izanami_authorized_patterns: '*'
+  otoroshiRightsField: otoroshi_rights

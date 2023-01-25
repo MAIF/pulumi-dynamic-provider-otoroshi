@@ -1,0 +1,4 @@
+kind: JwtVerifier
+spec:
+  id: minimal-jwtverifier
+  name: minimal-jwtverifier

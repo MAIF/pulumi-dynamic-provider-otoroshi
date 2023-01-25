@@ -1,0 +1,2 @@
+config:
+  otoroshi:endpoint: http://otoroshi-api.oto.tools:8080

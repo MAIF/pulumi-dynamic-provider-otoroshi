@@ -1,0 +1,10 @@
+apiVersion: proxy.otoroshi.io/v1alpha1
+kind: Organization
+metadata:
+  name: full-organization-2
+spec:
+  id: full-organization-2
+  name: full-organization-2
+  description: Default organization created with Pulumi
+  metadata: {}
+  tags: ['toto']

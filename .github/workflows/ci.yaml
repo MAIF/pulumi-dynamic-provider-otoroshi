@@ -1,0 +1,87 @@
+name: GitHub CI
+
+on: [push]
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    services:
+      otoroshi-api.oto.tools:
+        image: maif/otoroshi:16.0.4
+        options: >-
+          --health-cmd "curl -f http://otoroshi-api.oto.tools:8080/health"
+          --health-interval 2s
+          --health-timeout 5s
+          --health-retries 25
+          --health-start-period 20s
+        ports:
+          - 8080:8080
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install pulumi
+        uses: pulumi/setup-pulumi@v2 # Update ASAP (Node.js 12 used)
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Unit testing
+        run: npm run test
+      - name: Integration testing
+        env:
+          PULUMI_CONFIG_PASSPHRASE: 1234567890
+          OTOROSHI_CLIENT_ID: admin-api-apikey-id
+          OTOROSHI_CLIENT_SECRET: admin-api-apikey-secret
+        run: |
+          cd pulumi-tests
+          mkdir mystackname
+          pulumi login file://mystackname
+          pulumi stack init dev
+          pulumi up --yes
+          pulumi refresh --yes --expect-no-changes
+          pulumi destroy --yes --skip-preview
+          pulumi stack rm dev --yes --force || (pulumi stack rm dev --yes --force && exit 1)
+  create-release:
+    name: Create Github Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.AUTH_GITHUB_TOKEN }}
+        with:
+          prerelease: true
+          draft: true
+  publish:
+    name: Publish to NPMjs & Github packages
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - create-release
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: npm ci
+      - name: Publish to npmjs
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+      - name: Publish to Github packages
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.AUTH_GITHUB_TOKEN }}

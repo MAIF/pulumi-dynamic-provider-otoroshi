@@ -1,0 +1,4 @@
+kind: ServiceDescriptor
+spec:
+  id: minimal-service-descriptor
+  name: minimal-service-descriptor

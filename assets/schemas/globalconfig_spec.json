@@ -1,0 +1,23 @@
+{
+    "$id": "globalconfig_spec.json",
+    "type": "object",
+    "title": "Otoroshi GlobalConfig Specification",
+    "description": "The GlobalConfig file is a YAML file defining an Otoroshi GlobalConfig resource.",
+    "properties": {
+        "apiVersion": { "type": "string" },
+        "kind": { "type": "string" },
+        "metadata": {
+            "type": "object",
+            "properties": {
+                "name": { "type": "string" }
+            },
+            "additionalProperties": false
+        },
+        "spec": {
+            "type": "object",
+            "required": ["otoroshiId"]
+        }
+    },
+    "required": ["kind", "spec"],
+    "additionalProperties": false
+}

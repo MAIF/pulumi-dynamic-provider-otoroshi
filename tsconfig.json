@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "outDir": "./lib",
+        "target": "es2016",
+        "module": "commonjs",
+        "declaration": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "resolveJsonModule": true
+    },
+    "include": ["assets/schemas/*.json", "assets/test/**/*", "src/**/*.test.ts"],
+    "files": ["index.ts"]
+}

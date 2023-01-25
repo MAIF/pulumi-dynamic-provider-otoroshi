@@ -1,0 +1,37 @@
+version: '3'
+
+networks:
+  localnet:
+    driver: bridge
+
+services:
+  pulumi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Overrides default entrypoint
+    entrypoint: bash
+    environment:
+      - PULUMI_ACCESS_TOKEN # read env var from host (to login to Pulumi SaaS)
+      - PULUMI_CONFIG_PASSPHRASE=1234567890 # use to encrypt local stack
+      - OTOROSHI_CLIENT_ID=admin-api-apikey-id
+      - OTOROSHI_CLIENT_SECRET=admin-api-apikey-secret
+    volumes:
+      # This is where VS Code should expect to find your project's source code and the value of "workspaceFolder" in .devcontainer/devcontainer.json
+      - ..:/workspace:cached
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    networks:
+      - localnet
+
+  otoroshi:
+    image: maif/otoroshi:16.0.4
+    container_name: otoroshi
+    hostname: otoroshi-api.oto.tools
+    environment:
+      - OTOROSHI_INITIAL_ADMIN_LOGIN=admin
+      - OTOROSHI_INITIAL_ADMIN_PASSWORD=admin
+    ports:
+      - 127.0.0.1:8080:8080
+    networks:
+      - localnet

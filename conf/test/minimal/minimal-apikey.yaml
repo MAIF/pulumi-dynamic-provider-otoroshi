@@ -1,0 +1,4 @@
+kind: ApiKey
+spec:
+  clientId: minimal-apikey
+  clientName: minimal-apikey

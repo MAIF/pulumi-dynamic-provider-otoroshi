@@ -1,0 +1,11 @@
+apiVersion: proxy.otoroshi.io/v1alpha1
+kind: Team
+metadata:
+  name: full-team-1
+spec:
+  id: full-team-1
+  tenant: default
+  name: full-team-1
+  description: full-team-1
+  metadata: {}
+  tags: []

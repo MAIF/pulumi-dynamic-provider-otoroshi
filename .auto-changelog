@@ -1,0 +1,9 @@
+{
+    "output": "CHANGELOG.md",
+    "template": "keepachangelog",
+    "commitLimit": false,
+    "package": true,
+    "hideEmptyReleases": true,
+    "ignoreCommitPattern": "chore:.*|docs:.*|style:.*|test:.*",
+    "breakingPattern": "BREAKING CHANGE:"
+}
