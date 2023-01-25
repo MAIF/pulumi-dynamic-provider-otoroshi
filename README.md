@@ -1,14 +1,28 @@
-# Otoroshi Pulumi Dynamic Provider
+<div align="center">
+  <h1>Pulumi Dynamic Provider for Otoroshi</h1>
 
-This is a **[Pulumi dynamic provider](https://www.pulumi.com/docs/intro/concepts/resources/dynamic-providers)** implementation for **[Otoroshi](https://maif.github.io/otoroshi/)**. It lets you use Otoroshi resources in YAML with a GitOps approach.
+  🛠
 
-## Requirement
+  Manage **[Otoroshi](https://maif.github.io/otoroshi/)** resources (Services, Apikeys, etc...) with **[Pulumi](https://www.pulumi.com)**.
+</div>
+
+<hr />
+
+[![Build Status](https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi/actions/workflows/ci.yaml/badge.svg)](https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi/actions/workflows/ci.yaml)
+[![version](https://img.shields.io/npm/v/@antoine-lecomte/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://www.npmjs.com/package/@antoine-lecomte/pulumi-dynamic-provider-otoroshi)
+[![downloads](https://img.shields.io/npm/dm/@antoine-lecomte/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@antoine-lecomte/pulumi-dynamic-provider-otoroshi&from=2023-01-24)
+[![Apache-2.0](https://img.shields.io/npm/l/@antoine-lecomte/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+
+
+## Installation
+
+### Requirement
 
 - Pulumi & Typescript
 - Deployed and working Otoroshi (at least 1.5.18)
 - Otoroshi Apikey to manage resources (and enough privileges)
-
-## Setup
 
 ### Create a new pulumi project
 
@@ -17,12 +31,12 @@ Create a new Pulumi project and install the library
 ```shell
 pulumi new typescript -y --dir my_project_dir
 cd my_project_dir
-npm install @alelib/pulumi-dynamic-provider-otoroshi
+npm install @antoine-lecomte/pulumi-dynamic-provider-otoroshi
 ```
 
 ### Create a new stack
 
-Create a new pulumi stack configuration file (Ex : `Pulumi.dev.yaml`). Define your Otoroshi URL with the attribute **otoroshi:endpoint**
+Create a new Pulumi stack and the configuration file (Ex : **Pulumi.dev.yaml**). Set your Otoroshi URL in `otoroshi:endpoint`
 
 ```yaml
 config:
@@ -31,10 +45,10 @@ config:
 
 ### Use the dynamic provider
 
-Modify the `index.ts` created by Pulumi with the following. Give it the PATH to your YAML resources folder as `assetsRelativeFolder`. Subdirectories of the PATH you provided will be scanned as well.
+Modify the **index.ts** created by Pulumi with the following. Give it the PATH to your YAML resources folder as `assetsRelativeFolder`. Subdirectories of the PATH you provided will be scanned as well.
 
 ```typescript
-import { ResourceFileReader } from '@alelib/pulumi-dynamic-provider-otoroshi'
+import { ResourceFileReader } from '@antoine-lecomte/pulumi-dynamic-provider-otoroshi'
 import { resolve } from 'path'
 
 const myReader = new ResourceFileReader({ assetsRelativeFolder: resolve(__dirname, `../conf/test`) })
@@ -105,7 +119,7 @@ spec:
   tags: []
 ```
 
-### Import full resources
+### Import resources
 
 > For those who know the command `pulumi import`, it is not natively supported in dynamic provider (See [pulumi/pulumi issue#7534](https://github.com/pulumi/pulumi/issues/7534)). An alternative solution is implemented.
 
@@ -121,10 +135,24 @@ For an example, see [import-default-organization.yaml](./conf//test/import/impor
 
 ### Refresh resources
 
-Pulumi can compares the current stack's resource state with the state known to exist in Otoroshi. Any such changes are adopted into the current stack. Note that if your YAML files aren't updated accordingly, subsequent updates may still appear to be out of sync with respect to the Otoroshi source of truth.
+Pulumi can compares the current known resources (i.e. : wanted state) with the real Otoroshi resource (i.e.: real state). When doing so, any changes are adopted into the current stack. It is a great tool to detect **configuration drift**.
+
+Note that this command will **NOT** update YAML files in your git repo. You **MUST** updated them manually. If you do not, subsequent updates may still appear to be out of sync with respect to the Otoroshi source of truth.
 
 ```shell
 pulumi refresh
+```
+
+## Handle multiples Pulumi stacks
+
+When you have multiples Otoroshi instance (dev, qa, preprod, prod), you can manage them with [Pulumi stacks](https://www.pulumi.com/docs/intro/concepts/stack/).
+
+You create a folder for each stack inside **conf** (ex: /conf/dev, /conf/preprod, etc...).
+Then, edit `myReader.run` to read the folder for the choosen stack.
+
+```typescript
+import * as pulumi from '@pulumi/pulumi'
+myReader.run(resolve(__dirname, `./conf/${pulumi.getStack()}`))
 ```
 
 ## Handle sensitive information
@@ -158,21 +186,11 @@ spec:
   clientSecret: ${vault://azurevault/otoroshi-apikey-minimal-apikey/latest}
 ```
 
-## Handle multiples Pulumi stacks
-
-You can create a folder for each stack inside **conf** (ex: /conf/dev, /conf/preprod, etc...).
-Then you edit the run call to scan only the current stack folder
-
-```typescript
-import * as pulumi from '@pulumi/pulumi'
-myReader.run(resolve(__dirname, `./conf/${pulumi.getStack()}`))
-```
-
 ## ResourceFileReader options
 
 AJV validation schema ensure that mandatory attributes are presents. It is _enable by default_, but you can disable it with **doValidate**.
 
-You can customise resource kind import order with **sortOrder**. (There is already a default sorting order to prevent dependencies issues).
+You can customise resource kind creating order with **sortOrder**. (There is already a default sorting order to prevent dependencies issues).
 
 ```typescript
 const myReader = new ResourceFileReader({
@@ -207,16 +225,10 @@ Writing time to the pulumi stack is impacted by the concept of dynamic provider 
 
 ## Workaround
 
-- **\_\_provider** : If some changes are done on the provider code, do `pulumi up` before doing any changes on the resources. It force the serialized provider (_\_\_provider_ in the pulumi state) informations to be updated. It is a good pratice to avoid stranges behaviors. The provider code is serialise and store into the stack
+- **\_\_provider** : If some changes are done on the provider code, do `pulumi up` before doing any changes on the resources. It force the serialized provider (_\_\_provider_ in the pulumi state) informations to be updated for exising resouces. It is good pratice to avoid doing resources modification at the same time.
 - Created ressource from the provider have only the **id** readable. It's because the provider has a generic and minimal implementation. It's do not know all attributes of all resources
 - **Dynamic Provider Ressource Type** : Pulumi resources are created with the same type **pulumi-nodejs:dynamic:Resource**. It's hardcoded in the dynamic provider abstract class (See [pulumi/pulumi nodejs/dynamic/index.ts#L204](https://github.com/pulumi/pulumi/blob/master/sdk/nodejs/dynamic/index.ts#L204)). It's a known current limitation (See [pulumi/pulumi issue#9434](https://github.com/pulumi/pulumi/issues/9434)).
 - **pulumi import** is not natively supported (See [pulumi/pulumi issue#7534](https://github.com/pulumi/pulumi/issues/7534)). An alternative solution is implemented, See section [Import existing resources](#Import-existing-resources)
-
-## Known Otoroshi issues
-
-- Exported Globalconfig - must protect properties **snowMonkeyConfig.startTime** and **snowMonkeyConfig.stopTime**. See [Otoroshi - issue@1176](`https://github.com/MAIF/otoroshi/issues/1176`)
-- Exported Organization - must replace kind by `Tenant`. See [Otoroshi - issue@1176](`https://github.com/MAIF/otoroshi/issues/1173`)
-- Admin resource cannot be exported or imported. See [Otoroshi - issue@1176](`https://github.com/MAIF/otoroshi/issues/1179`)
 
 ## Changelog
 
