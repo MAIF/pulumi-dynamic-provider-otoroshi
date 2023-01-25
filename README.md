@@ -175,7 +175,7 @@ spec:
 
 AJV validation schema ensure that mandatory attributes are presents. It is _enable by default_, but you can disable it with **doValidate**.
 
-You can customise resource kind creating order with **sortOrder**. A [default sorting order](./src/components/resourceFileReader.ts#62) is already set to prevent dependencies issues.
+You can customise resource kind creating order with **sortOrder**. A [default sorting order](./src/components/resourceFileReader.ts#L62) is already set to prevent dependencies issues.
 
 ```typescript
 const myReader = new ResourceFileReader({
