@@ -77,28 +77,7 @@ spec:
   superAdmins: false
   rightsOverride: {}
   dataOverride:
-    francois.desmier@toto.fr:
-      izanami_admin: 'true'
-      izanami_authorized_patterns: '*'
-    antoine-ops.lecomte@externe.toto.fr:
-      izanami_admin: 'true'
-      izanami_authorized_patterns: '*'
-    Francois.WEMAERE@toto.fr:
-      izanami_admin: 'true'
-      izanami_authorized_patterns: '*'
-    alexandre.delegue@toto.fr:
-      izanami_admin: 'true'
-      izanami_authorized_patterns: '*'
-    christophe.janton@externe.toto.fr:
-      izanami_admin: 'true'
-      izanami_authorized_patterns: '*'
-    alexis.claveau@externe.toto.fr:
-      izanami_admin: 'true'
-      izanami_authorized_patterns: '*'
-    diakaridia.siribie@externe.toto.fr:
-      izanami_admin: 'true'
-      izanami_authorized_patterns: '*'
-    zineb.el.akrouti@externe.toto.fr:
+    antoine.lecomte@externe.toto.fr:
       izanami_admin: 'true'
       izanami_authorized_patterns: '*'
   otoroshiRightsField: otoroshi_rights

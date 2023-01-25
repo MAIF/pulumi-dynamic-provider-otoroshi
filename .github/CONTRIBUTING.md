@@ -73,16 +73,17 @@ pulumi destroy
 
 ## Versionning
 
-To release a new version:
-
-1. Commit code + changes infos in [CHANGELOG.md](./CHANGELOG.md) in the **Unreleased** section.
-2. Create the version (tag) manually on your desktop:
+To release a new version use `npm version.` Changes are automatically added in [CHANGELOG.md](./CHANGELOG.md) based on git history.
 
 ```bash
-npm run version-changelog-patch
-npm run version-changelog-minor
-npm run version-changelog-major
+npm version patch
+npm version minor
+npm version major
 ```
+
+## Continuous integration
+
+Every commit and PR are built, unit tested and integration tested in [Github Actions](https://github.com/MAIF/pulumi-dynamic-provider-otoroshi/actions). 
 
 ## Reference
 

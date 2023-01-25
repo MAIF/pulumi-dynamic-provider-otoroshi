@@ -1,19 +1,26 @@
 <div align="center">
   <h1>Pulumi Dynamic Provider for Otoroshi</h1>
+🛠
 
-  🛠
+Manage **[Otoroshi](https://maif.github.io/otoroshi/)** resources (Services, Apikeys, etc...) through **[Pulumi](https://www.pulumi.com)**.
 
-  Manage **[Otoroshi](https://maif.github.io/otoroshi/)** resources (Services, Apikeys, etc...) with **[Pulumi](https://www.pulumi.com)**.
 </div>
 
 <hr />
 
-[![Build Status](https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi/actions/workflows/ci.yaml/badge.svg)](https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi/actions/workflows/ci.yaml)
-[![version](https://img.shields.io/npm/v/@antoine-lecomte/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://www.npmjs.com/package/@antoine-lecomte/pulumi-dynamic-provider-otoroshi)
-[![downloads](https://img.shields.io/npm/dm/@antoine-lecomte/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@antoine-lecomte/pulumi-dynamic-provider-otoroshi&from=2023-01-24)
-[![Apache-2.0](https://img.shields.io/npm/l/@antoine-lecomte/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi/blob/master/LICENSE)
+[![Build Status](https://github.com/MAIF/pulumi-dynamic-provider-otoroshi/actions/workflows/ci.yaml/badge.svg)](https://github.com/MAIF/pulumi-dynamic-provider-otoroshi/actions/workflows/ci.yaml)
+[![version](https://img.shields.io/npm/v/@MAIF/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://www.npmjs.com/package/@MAIF/pulumi-dynamic-provider-otoroshi)
+[![downloads](https://img.shields.io/npm/dm/@MAIF/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@MAIF/pulumi-dynamic-provider-otoroshi&from=2023-01-24)
+[![Apache-2.0](https://img.shields.io/npm/l/@MAIF/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://github.com/MAIF/pulumi-dynamic-provider-otoroshi/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
+This tool allow to define resource in YAML format and provide a GitOps approach. 
+
+Izanami is a shared configuration service well-suited for micro-service architecture implementation. In addition to shared configuration, Izanami provides feature flipping and A/B Testing. Izanami provides a UI to allow non-tech users to toggle features and to handle A/B testing.
+
+Izanami also provides first class integration. We provide Java, Scala, Node and React clients to integrate with your apps. We also provide webhook integration.
+
+Izanami is written in scala using the playframework and developed by the MAIF OSS team.
 
 
 ## Installation
@@ -31,7 +38,7 @@ Create a new Pulumi project and install the library
 ```shell
 pulumi new typescript -y --dir my_project_dir
 cd my_project_dir
-npm install @antoine-lecomte/pulumi-dynamic-provider-otoroshi
+npm install @MAIF/pulumi-dynamic-provider-otoroshi
 ```
 
 ### Create a new stack
@@ -48,7 +55,7 @@ config:
 Modify the **index.ts** created by Pulumi with the following. Give it the PATH to your YAML resources folder as `assetsRelativeFolder`. Subdirectories of the PATH you provided will be scanned as well.
 
 ```typescript
-import { ResourceFileReader } from '@antoine-lecomte/pulumi-dynamic-provider-otoroshi'
+import { ResourceFileReader } from '@MAIF/pulumi-dynamic-provider-otoroshi'
 import { resolve } from 'path'
 
 const myReader = new ResourceFileReader({ assetsRelativeFolder: resolve(__dirname, `../conf/test`) })
@@ -236,4 +243,4 @@ See [CHANGELOG.md](./CHANGELOG.md)
 
 ## Contribute
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md)
+See [CONTRIBUTING.md](.github/CONTRIBUTING.md)

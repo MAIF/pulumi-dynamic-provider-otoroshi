@@ -1,14 +1,14 @@
 {
-    "name": "@antoine-lecomte/pulumi-dynamic-provider-otoroshi",
+    "name": "@MAIF/pulumi-dynamic-provider-otoroshi",
     "description": "Pulumi dynamic provider for Otoroshi",
-    "version": "1.0.0",
+    "version": "0.9.0",
     "author": "Antoine LECOMTE",
     "license": "Apache-2.0",
     "repository": {
-        "url": "https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi"
+        "url": "https://github.com/MAIF/pulumi-dynamic-provider-otoroshi"
     },
-    "homepage": "https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi",
-    "bugs": "https://github.com/antoine-lecomte/pulumi-dynamic-provider-otoroshi/issues",
+    "homepage": "https://github.com/MAIF/pulumi-dynamic-provider-otoroshi",
+    "bugs": "https://github.com/MAIF/pulumi-dynamic-provider-otoroshi/issues",
     "engines": {
         "node": ">=16"
     },
