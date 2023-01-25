@@ -1,7 +1,7 @@
 {
     "name": "@MAIF/pulumi-dynamic-provider-otoroshi",
     "description": "Pulumi dynamic provider for Otoroshi",
-    "version": "0.9.0",
+    "version": "1.0.0",
     "author": "Antoine LECOMTE",
     "license": "Apache-2.0",
     "repository": {
