@@ -1,5 +1,5 @@
 {
-    "name": "@MAIF/pulumi-dynamic-provider-otoroshi",
+    "name": "@maif/pulumi-dynamic-provider-otoroshi",
     "description": "Pulumi dynamic provider for Otoroshi",
     "version": "1.0.0",
     "author": "Antoine LECOMTE",
