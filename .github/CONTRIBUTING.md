@@ -83,7 +83,7 @@ npm version major
 
 ## Continuous integration
 
-Every commit and PR are built, unit tested and integration tested in [Github Actions](https://github.com/MAIF/pulumi-dynamic-provider-otoroshi/actions). 
+Every commit and PR are built, unit tested and integration tested in [Github Actions](https://github.com/MAIF/pulumi-dynamic-provider-otoroshi/actions).
 
 ## Reference
 
