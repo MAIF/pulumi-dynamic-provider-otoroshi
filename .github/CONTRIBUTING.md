@@ -71,11 +71,22 @@ pulumi destroy
 - delete your pulumi stack `pulumi stack rm dev --yes --force`
 - create a new pulumi stack `pulumi stack init dev`
 
-## Versionning
+## Versioning
 
-To release a new version use `npm version.` Changes are automatically added in [CHANGELOG.md](./CHANGELOG.md) based on git history.
+To release a new version use `npm version`. Changes are automatically added in [CHANGELOG.md](./CHANGELOG.md) based on git history.
+
+Avoid using RC version on branch **master** to keep a clean CHANGELOG.
 
 ```bash
+# To init RC version
+npm version prepatch --preid=rc
+npm version preminor --preid=rc
+npm version premajor --preid=rc
+
+# To increment current RC version (RC.X+1)
+npm version prerelease --preid=rc
+
+# To generate RELEASE version
 npm version patch
 npm version minor
 npm version major
