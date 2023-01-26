@@ -21,8 +21,9 @@
         "format-check": "prettier --check .",
         "lint": "eslint . --ext .ts",
         "audit-check": "npm audit --registry=https://registry.npmjs.org --audit-level=high",
+        "prepare": "npm run build",
         "dep-check": "depcheck --ignores=@types/node",
-        "prepublishOnly": "npm run lint",
+        "prepublish": "npm run format && npm run lint",
         "test": "jest",
         "test:watch": "jest --watch",
         "version": "auto-changelog && git add CHANGELOG.md"
