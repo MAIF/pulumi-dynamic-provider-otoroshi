@@ -5,6 +5,8 @@ import { enums, inputs } from '../types'
 import { handle } from '../utils'
 
 export class OtoroshiResource extends pulumi.dynamic.Resource {
+    static MODULE_NAME = 'otoroshi'
+
     /**
      * Create an Otoroshi resource with the given unique name, arguments, and options.
      * @param name — The unique name of the resource.
@@ -35,11 +37,30 @@ export class OtoroshiResource extends pulumi.dynamic.Resource {
             resourceInputs['__import'] = true
         }
 
-        /**
-         * resource kind `GlobalConfig` has a different behavior and need it's own provider
-         */
-        args.kind === 'GlobalConfig'
-            ? super(new OtoroshiGlobalConfigProvider(), name, resourceInputs, opts)
-            : super(new OtoroshiResourceProvider(), name, resourceInputs, opts)
+        // some kind have different behavior and need a custom provider
+        switch (args.kind) {
+            case 'GlobalConfig': {
+                super(
+                    new OtoroshiGlobalConfigProvider(),
+                    name,
+                    resourceInputs,
+                    opts,
+                    OtoroshiResource.MODULE_NAME,
+                    'GlobalConfig',
+                )
+                break
+            }
+            default: {
+                super(
+                    new OtoroshiResourceProvider(),
+                    name,
+                    resourceInputs,
+                    opts,
+                    OtoroshiResource.MODULE_NAME,
+                    resourceInputs['kind'],
+                )
+                break
+            }
+        }
     }
 }
