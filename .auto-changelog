@@ -4,6 +4,6 @@
     "commitLimit": false,
     "package": true,
     "hideEmptyReleases": true,
-    "ignoreCommitPattern": "chore:.*|docs:.*|style:.*|test:.*",
+    "ignoreCommitPattern": "chore:.*|docs:.*|doc:.*|style:.*|test:.*|Merge\\ pull\\ request",
     "breakingPattern": "BREAKING CHANGE:"
 }
