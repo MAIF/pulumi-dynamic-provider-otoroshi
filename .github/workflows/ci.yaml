@@ -57,7 +57,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.AUTH_GITHUB_TOKEN }}
         with:
-          prerelease: true
+          prerelease: false
           draft: true
   publish:
     name: Publish to NPMjs & Github packages
