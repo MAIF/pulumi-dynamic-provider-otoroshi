@@ -2,7 +2,7 @@
   <h1>Pulumi Dynamic Provider for Otoroshi</h1>
 🛠
 
-Manage **[Otoroshi](https://maif.github.io/otoroshi/)** resources (Services, Apikeys, etc...) through **[Pulumi](https://www.pulumi.com)**.
+Manage **<a href="https://maif.github.io/otoroshi" target="_blank">Otoroshi</a>** resources (Services, Apikeys, etc...) through **<a href="https://www.pulumi.com" target="_blank">Pulumi</a>**.
 
 </div>
 
@@ -11,6 +11,7 @@ Manage **[Otoroshi](https://maif.github.io/otoroshi/)** resources (Services, Api
 [![Build Status](https://github.com/MAIF/pulumi-dynamic-provider-otoroshi/actions/workflows/ci.yaml/badge.svg)](https://github.com/MAIF/pulumi-dynamic-provider-otoroshi/actions/workflows/ci.yaml)
 [![version](https://img.shields.io/npm/v/@maif/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://www.npmjs.com/package/@maif/pulumi-dynamic-provider-otoroshi)
 [![downloads](https://img.shields.io/npm/dm/@maif/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@maif/pulumi-dynamic-provider-otoroshi&from=2023-01-25)
+[![GitHub last commit](https://img.shields.io/github/last-commit/MAIF/pulumi-dynamic-provider-otoroshi.svg)](https://github.com/MAIF/pulumi-dynamic-provider-otoroshi/commits/master)
 [![Apache-2.0](https://img.shields.io/npm/l/@maif/pulumi-dynamic-provider-otoroshi.svg?style=flat-square)](https://github.com/MAIF/pulumi-dynamic-provider-otoroshi/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
@@ -18,34 +19,38 @@ This tool allow to define resource in YAML format and provide a GitOps managemen
 
 ## Installation
 
-### Requirement
-
-- Pulumi & Typescript
-- Deployed and working Otoroshi (at least 1.5.18)
-- Otoroshi Apikey to manage resources (and enough privileges)
-
 ### Create a new pulumi project
 
-Create a new Pulumi project and install the library
+See <a href="https://www.pulumi.com/docs/intro/languages/javascript/#typescript" target="_blank">Pulumi official documentation</a>
 
-```shell
-pulumi new typescript -y --dir my_project_dir
-cd my_project_dir
-npm install @maif/pulumi-dynamic-provider-otoroshi
-```
+### Install package
+
+To use from JavaScript or TypeScript in Node.js, install using either `npm` :
+
+    npm install @maif/pulumi-dynamic-provider-otoroshi
+
+or `yarn`:
+
+    yarn add @maif/pulumi-dynamic-provider-otoroshi
 
 ### Create a new stack
 
-Create a new Pulumi stack and the configuration file (Ex : **Pulumi.dev.yaml**). Set your Otoroshi URL in `otoroshi:endpoint`
+Create a new Pulumi stack :
+
+    pulumi stack init dev
+
+And the configuration file **Pulumi.dev.yaml** with your Otoroshi URL in `otoroshi:endpoint`.
+
+Exemple :
 
 ```yaml
 config:
   otoroshi:endpoint: http://otoroshi-api.oto.tools:8080
 ```
 
-### Use the dynamic provider
+### Use the provider
 
-Modify the **index.ts** created by Pulumi with the following. Give it the PATH to your YAML resources folder as `assetsRelativeFolder`. Create a folder for each stack inside **conf** (ex: /conf/dev, /conf/preprod, etc...). Subdirectories of the PATH you provided will be scanned as well.
+Modify the **index.ts** created by Pulumi with the following :
 
 ```typescript
 import { ResourceFileReader } from '@maif/pulumi-dynamic-provider-otoroshi'
@@ -59,9 +64,14 @@ myReader.run()
 export const otoroshiResources = myReader.getResourcesCreatedByKind()
 ```
 
+Give it the PATH to your YAML resources folder as `assetsRelativeFolder`. Create a folder for each stack inside **conf** (ex: /conf/dev, /conf/preprod, etc...). Subdirectories of the PATH you provided will be scanned as well.
+
+
 ## Configure credentials
 
-Credentials are not stored in pulumi stack or in code, you must set them as environement variables
+Credentials are not stored in pulumi stack or in code. You must set them as environement variables.
+
+> Use an Otoroshi apikey with enough privileges to create/request/update/delete resources.
 
 ```shell
 # Windows
@@ -82,9 +92,9 @@ pulumi up
 
 ## YAML Configurations examples
 
-Each resource must be define in an individual file. The **filename** will be used to name the resource in the Pulumi state : **you should use unique and relevant names**. But you can organize folder and subfolders as you like.
+Each Otoroshi resource is defined by an individual YAML file. The **filename** will be used to name the resource in the Pulumi state : **you should use unique and relevant names**. You can organize folder and subfolders as you like.
 
-For an example, see [./conf/test](./conf/test/)
+For example, see [./conf/test](./conf/test/)
 
 ### Create minimal resources
 
@@ -105,7 +115,7 @@ spec:
 
 ### Create full resources
 
-You can also export existing resource from Otoroshi by clicking on the YAML button on resource UI.
+You can also export existing resource from Otoroshi UI with the YAML button present on each resource.
 
 ```yaml
 apiVersion: proxy.otoroshi.io/v1
@@ -122,9 +132,11 @@ spec:
 
 ### Import resources
 
-> For those who know the command `pulumi import`, it is not natively supported in dynamic provider (See [pulumi/pulumi issue#7534](https://github.com/pulumi/pulumi/issues/7534)). An alternative solution is implemented.
+> For those who know the command `pulumi import`, it is not natively supported in dynamic provider (See <a href="https://github.com/pulumi/pulumi/issues/7534" target="_blank">pulumi/pulumi issue#7534</a>). An alternative solution is implemented.
 
 This mecanism allow to read a real resource and write to the Pulumi State. When importing, it is only reading on the provider.
+
+**GlobalConfig** cannot be imported. It does not need to. You can export your existing GlobalConfig and it will override tbe existing one.
 
 To import a resource, you must:
 
@@ -132,9 +144,20 @@ To import a resource, you must:
 - add the property **metadata.import** and set the value `true`
 - after the import, you **must** remove the property **metadata.import**
 
-For an example, see [import-default-organization.yaml](./conf/test/import/import-default-organization.yaml)
-
-**GlobalConfig** cannot be imported. It does not need to. You can export your existing GlobalConfig and it will override tbe existing one.
+See the example [import-default-organization.yaml](./conf/test/import/import-default-organization.yaml) :
+```yaml
+apiVersion: proxy.otoroshi.io/v1alpha1
+kind: Organization
+metadata:
+  name: default-organization
+  import: true
+spec:
+  id: default
+  name: Default organization
+  description: The default organization
+  metadata: {}
+  tags: []
+```
 
 ### Refresh resources
 
@@ -151,7 +174,7 @@ pulumi refresh
 Since every resource configuration is stored in git, you cannot specify **confidentials informations** (i.e.: secrets, password, token, etc...).
 It is better to use an external vault to store them and use reference in Otoroshi.
 
-Follow this documentation to configure and enable [secrets management](https://maif.github.io/otoroshi/manual/topics/secrets.html) in Otoroshi.
+Follow this documentation to configure and enable <a href="https://maif.github.io/otoroshi/manual/topics/secrets.html" target="_blank">secrets management</a> in Otoroshi.
 
 After setting up, you can use reference instead of confidential information (See link above for reference format).
 
@@ -197,7 +220,7 @@ Time to manage 50 organizations, 50 services and 100 Api Keys (using a local Pul
 - delete (100 resource) : ~4 minutes (preview: 59s, up: 3min30s)
 
 Writing time to the pulumi stack is impacted by the concept of dynamic provider : the provider code is serialize into **each** resources in the attribute.
-**\_\_provider**. See [Pulumi Function Serialization](https://www.pulumi.com/docs/intro/concepts/function-serialization) for more informations.
+**\_\_provider**. See <a href="https://www.pulumi.com/docs/intro/concepts/function-serialization" target="_blank">Pulumi Function Serialization</a> for more informations.
 
 ## Roadmap
 
@@ -212,5 +235,4 @@ Writing time to the pulumi stack is impacted by the concept of dynamic provider 
 
 - **\_\_provider** : If some changes are done on the provider code, do `pulumi up` before doing any changes on the resources. It force the serialized provider (_\_\_provider_ in the pulumi state) informations to be updated for exising resouces. It is good pratice to avoid doing resources modification at the same time.
 - Created ressource from the provider have only the **id** readable. It's because the provider has a generic and minimal implementation. It's do not know all attributes of all resources
-- **Dynamic Provider Ressource Type** : Pulumi resources are created with the same type **pulumi-nodejs:dynamic:Resource**. It's hardcoded in the dynamic provider abstract class (See [pulumi/pulumi nodejs/dynamic/index.ts#L204](https://github.com/pulumi/pulumi/blob/master/sdk/nodejs/dynamic/index.ts#L204)). It's a known current limitation (See [pulumi/pulumi issue#9434](https://github.com/pulumi/pulumi/issues/9434)).
-- **pulumi import** is not natively supported (See [pulumi/pulumi issue#7534](https://github.com/pulumi/pulumi/issues/7534)). An alternative solution is implemented, See section [Import existing resources](#Import-existing-resources)
+- **pulumi import** is not natively supported (See <a href="https://github.com/pulumi/pulumi/issues/7534" target="_blank">pulumi/pulumi issue#7534</a>). An alternative solution is implemented, See section [Import existing resources](#Import-existing-resources).
