@@ -15,6 +15,14 @@ You need **docker** and **docker-compose** on your computer, then :
 - All the dev environment will be spinup and the workspace mounted
 - Enjoy !
 
+## Manage Otoroshi Resource Type
+
+If you want to add or remove more Resource Type (ex: Route, ServiceDescriptor, etc...) you must edit 2 files :
+
+- [src/components/resourceFileReader.ts](../src/components/resourceFileReader.ts) : **KIND_SORT_ORDER** must contain all types.
+- [src/types/enum.ts](../src/types/enum.ts) : Enum **Kind** contains types name and Enum **Endpoints** contains endpoint (See [Otoroshi - Swagger-ui](https://maif.github.io/otoroshi/swagger-ui/index.html#/)).
+
+
 ## Useful CLI commands
 
 ### Install

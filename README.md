@@ -200,6 +200,8 @@ AJV validation schema ensure that mandatory attributes are presents. It is _enab
 
 You can customise resource kind creating order with **sortOrder**. A [default sorting order](./src/components/resourceFileReader.ts#L62) is already set to prevent dependencies issues.
 
+If you choose to customize **sortOrder**, you must specify all resources types you use.
+
 ```typescript
 const myReader = new ResourceFileReader({
   doValidate: false,
